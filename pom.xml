@@ -33,11 +33,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--ToDO: Find latest compatible openapi-ui version -->
-<!--        <dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
-        </dependency>-->
+            <version>1.6.13</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
