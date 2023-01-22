@@ -1,21 +1,13 @@
 package com.example.ktorrest.models
 
-import lombok.Data
-import lombok.Getter
-import lombok.Setter
 import org.springframework.jdbc.core.JdbcTemplate
 import java.sql.PreparedStatement
 
-class TesterDetails {
-    @Getter
-    @Setter
-    private val userId: Long = 0L;
-    @Getter
-    @Setter
-    private val userText: String? = null
-    @Getter
-    @Setter
-    private val userDescription: String? = null
+class TesterDetails(
+    private var userId: Long,
+    private var userText: String?,
+    private var userDescription: String?
+) {
 
     companion object {
         fun insertIntoTester(details: TesterDetails, jdbcTemplate: JdbcTemplate) {
