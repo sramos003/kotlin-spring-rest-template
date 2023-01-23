@@ -2,7 +2,6 @@ package com.example.kotlinspring.controllers
 
 import com.example.kotlinspring.dao_models.Users
 import com.example.kotlinspring.repositories.IUsersRepository
-import com.thedeanda.lorem.Lorem
 import com.thedeanda.lorem.LoremIpsum
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
