@@ -8,13 +8,13 @@ import com.example.kotlinspring.dao_models.Users
  */
 interface IUsersRepository {
     // Create
-    fun insertIntoUsers(details: Users)
+    fun insertIntoUsers(userDetails: Users)
     // Read - Get all records
     fun getAllUserRecords(): List<Users>
     // Read - Get one record 
     fun getUserRecord(userId: Long): Users?
     // Update
-    fun updateUserRecord(userId: Long, userDescription: String)
+    fun updateUserRecord(userDetails: Users)
     // Delete
     fun deleteUserRecords()
 }

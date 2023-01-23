@@ -44,7 +44,7 @@ class TestController(private var usersRepository: IUsersRepository) {
     // Update
     @PostMapping(value = ["/update-user-description/{userId}"], produces = [MediaType.TEXT_HTML_VALUE])
     fun updateUser(@PathVariable userId: Long, @RequestBody userDescription: String): ResponseEntity<String> {
-        usersRepository.updateUserRecord(userId, userDescription)
+        usersRepository.updateUserRecord(Users(userId, "", userDescription))
         return ResponseEntity.ok(String.format("UPDATED USER_ID %s", userId))
     }
 
