@@ -2,13 +2,16 @@ package com.example.kotlinspring.repositories.impl
 
 import com.example.kotlinspring.dao_models.Users
 import com.example.kotlinspring.repositories.IUsersRepository
+import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import java.util.stream.Stream
 
-@Repository
+@Component
 class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate) : IUsersRepository {
+    
     // Create
+    @Throws(DataAccessException::class)
     final override fun insertIntoUsers(userDetails: Users) {
         jdbcTemplate.update(
             "INSERT INTO USERS (USER_NAME, USER_DESCRIPTION) VALUES (?, ?)",
@@ -17,6 +20,7 @@ class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate) : IUsersReposi
     }
 
     // Read - Get all records
+    @Throws(DataAccessException::class)
     final override fun getAllUserRecords(): List<Users> {
         return jdbcTemplate.query(
             "SELECT USER_ID, USER_NAME, USER_DESCRIPTION FROM USERS",
@@ -25,6 +29,7 @@ class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate) : IUsersReposi
     }
 
     // Read - Get one record 
+    @Throws(DataAccessException::class)
     final override fun getUserRecord(userId: Long): Users? {
         return jdbcTemplate.queryForObject(
             "SELECT USER_ID, USER_NAME, USER_DESCRIPTION FROM USERS WHERE USER_ID =?",
@@ -34,6 +39,7 @@ class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate) : IUsersReposi
     }
 
     // Update
+    @Throws(DataAccessException::class)
     final override fun updateUserRecord(userDetails: Users) {
         println(
             String.format(
@@ -47,6 +53,7 @@ class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate) : IUsersReposi
     }
 
     // Delete
+    @Throws(DataAccessException::class)
     final override fun deleteUserRecords() {
         // Delete all user records then
         // Reset auto_increment sequence for pk user_id

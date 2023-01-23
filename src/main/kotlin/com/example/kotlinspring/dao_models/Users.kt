@@ -32,7 +32,7 @@ class Users {
                     run {
                         Users(
                             rs.getLong("USER_ID"),
-                            rs.getString("USER_TEXT"),
+                            rs.getString("USER_NAME"),
                             rs.getString("USER_DESCRIPTION")
                         )
                     }

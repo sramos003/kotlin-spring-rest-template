@@ -3,6 +3,7 @@ package com.example.kotlinspring.controllers
 import com.example.kotlinspring.dao_models.Users
 import com.example.kotlinspring.repositories.IUsersRepository
 import com.thedeanda.lorem.LoremIpsum
+import org.springframework.dao.DataAccessException
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -23,6 +24,7 @@ class TestController(private var usersRepository: IUsersRepository) {
     }
 
     // Create
+    @Throws(DataAccessException::class)
     @PostMapping(value = ["/save-new-user/{userName}"], produces = [MediaType.TEXT_HTML_VALUE])
     fun saveNewUser(@PathVariable userName: String): ResponseEntity<String> {
         usersRepository.insertIntoUsers(Users(userName.uppercase(), LoremIpsum.getInstance().getWords(5)))
@@ -30,18 +32,21 @@ class TestController(private var usersRepository: IUsersRepository) {
     }
 
     // Read - All
+    @Throws(DataAccessException::class)
     @GetMapping(value = ["/get-all-users"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getAllUsers(): List<Users> {
         return ArrayList(usersRepository.getAllUserRecords())
     }
 
     // Read - One
+    @Throws(DataAccessException::class)
     @GetMapping(value = ["/get-user/{userId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getUser(@PathVariable userId: Long): Users? {
         return usersRepository.getUserRecord(userId)
     }
 
     // Update
+    @Throws(DataAccessException::class)
     @PostMapping(value = ["/update-user-description/{userId}"], produces = [MediaType.TEXT_HTML_VALUE])
     fun updateUser(@PathVariable userId: Long, @RequestBody userDescription: String): ResponseEntity<String> {
         usersRepository.updateUserRecord(Users(userId, "", userDescription))
@@ -49,10 +54,10 @@ class TestController(private var usersRepository: IUsersRepository) {
     }
 
     // Delete
+    @Throws(DataAccessException::class)
     @GetMapping(value = ["/delete-all-users"], produces = [MediaType.TEXT_HTML_VALUE])
     fun deleteAllUsers(): ResponseEntity<String> {
         usersRepository.deleteUserRecords()
         return ResponseEntity.ok("TABLE CLEARED SUCCESSFULLY")
-
     }
 }
