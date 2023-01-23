@@ -5,12 +5,11 @@ import com.example.kotlinspring.repositories.IUsersRepository
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.PreparedStatementSetter
 import org.springframework.jdbc.core.RowMapper
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Repository
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 
-@Component
-
+@Repository
 class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate): IUsersRepository {
     val usersRowMapper: RowMapper<Users> =
         RowMapper { rs: ResultSet, rowNum: Int ->
