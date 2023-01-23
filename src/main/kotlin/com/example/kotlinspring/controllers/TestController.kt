@@ -23,16 +23,10 @@ class TestController(private var usersRepository: IUsersRepository) {
         return ResponseEntity.ok("My first kotlin API")
     }
 
-    /**
-     * Below are included methods to perform the basic CRUD operations on an internal H2 database having its state
-     * saved on application exit to ./database/cached_database.mv.db
-     */
-
     // Create
     @PostMapping(value = ["/save-new-user/{userName}"], produces = [MediaType.TEXT_HTML_VALUE])
     fun saveNewUser(@PathVariable userName: String): ResponseEntity<String> {
-        val ipsum: Lorem = LoremIpsum.getInstance()
-        usersRepository.insertIntoUsers(Users(userName.uppercase(), ipsum.getWords(5)))
+        usersRepository.insertIntoUsers(Users(userName.uppercase(), LoremIpsum.getInstance().getWords(5)))
         return ResponseEntity.ok(String.format("SAVED NEW USER {%s} TO DB", userName.uppercase()))
     }
 
