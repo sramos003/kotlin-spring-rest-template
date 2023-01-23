@@ -15,7 +15,6 @@ class TesterDetails {
         this.userText = userText
         this.userDescription = userDescription
     }
-    // End of getters.
     
     // Overriding toString default.
     override fun toString(): String {
