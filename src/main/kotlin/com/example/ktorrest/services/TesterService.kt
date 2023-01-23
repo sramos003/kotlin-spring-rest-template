@@ -9,6 +9,7 @@ import java.sql.ResultSet
 
 @Component
 class TesterService(private var jdbcTemplate: JdbcTemplate) {
+    
     init {
         resetTable()
         createTable()
@@ -17,7 +18,7 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
 
     private final fun addTestRecordsToTable(nRecords: Long) {
         val oneHundred = 100
-        var x = 0L;
+        var x = 0L
         while (x < nRecords) {
             val id: Long = oneHundred + x
             val details = TesterDetails(id, "hello-world", "hello-world-description")
@@ -41,7 +42,7 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
 
     @Throws(DataAccessException::class)
     fun getTableRecords(): List<TesterDetails> {
-        return jdbcTemplate.query(
+        val details =  jdbcTemplate.query(
             "SELECT * FROM TESTER"
         ) { rs: ResultSet, rowNum: Int ->
             TesterDetails(
@@ -50,6 +51,8 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
                 rs.getString("USER_DESCRIPTION")
             )
         }
+        println(details)
+        return details
     }
 
     @Throws(DataAccessException::class)
