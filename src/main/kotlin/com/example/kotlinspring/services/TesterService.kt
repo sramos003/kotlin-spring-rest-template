@@ -13,31 +13,17 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
     init {
         resetTable()
         createTable()
-        addTestRecordsToTable(30L)
-    }
-
-    private final fun addTestRecordsToTable(nRecords: Long) {
-        val oneHundred = 100
-        var x = 0L
-        while (x < nRecords) {
-            val id: Long = oneHundred + x
-            val details = TesterDetails(id, "hello-world", "hello-world-description")
-            insertIntoTester(details)
-            x++
-        }
     }
 
     @Throws(DataAccessException::class)
-    fun insertIntoTester(details: TesterDetails) {
-        val rowsUpdated = jdbcTemplate.update(
-            "INSERT INTO TESTER (USER_ID, USER_TEXT, USER_DESCRIPTION) VALUES (?, ?, ?)"
+    fun insertIntoTable(details: TesterDetails) {
+        jdbcTemplate.update(
+            "INSERT INTO TESTER (USER_TEXT, USER_DESCRIPTION) VALUES (?, ?)"
         ) { ps: PreparedStatement ->
-            ps.setLong(1, details.userId)
-            ps.setString(2, details.userText)
-            ps.setString(3, details.userDescription)
+            ps.setString(1, details.userText)
+            ps.setString(2, details.userDescription)
 
         }
-        println(String.format("%s ROWS UPDATED", rowsUpdated))
     }
 
     @Throws(DataAccessException::class)
@@ -57,9 +43,9 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
     final fun createTable() {
         jdbcTemplate.update(
             "CREATE TABLE TESTER(" +
-                    "USER_ID BIGINT NOT NULL PRIMARY KEY," +
-                    " USER_TEXT VARCHAR(50) NOT NULL," +
-                    " USER_DESCRIPTION VARCHAR(100) NOT NULL DEFAULT 'GENERIC DESCRIPTION'" +
+                    "USER_ID BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT," +
+                    " USER_TEXT VARCHAR(500) NOT NULL," +
+                    " USER_DESCRIPTION VARCHAR(500) NOT NULL DEFAULT 'GENERIC DESCRIPTION'" +
                     " )"
         )
     }

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>ktor-rest-template</artifactId>
+    <artifactId>kotlin-spring-rest-template</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ktor-rest-template</name>
-    <description>ktor-rest-template</description>
+    <name>kotlin-spring-rest-template</name>
+    <description>spring-rest-template-in-kotlin</description>
     <properties>
         <java.version>11</java.version>
         <kotlin.version>1.8.0</kotlin.version>
@@ -24,6 +24,11 @@
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.thedeanda</groupId>
+            <artifactId>lorem</artifactId>
+            <version>2.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
@@ -32,6 +37,10 @@
                     <artifactId>spring-boot-starter-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>

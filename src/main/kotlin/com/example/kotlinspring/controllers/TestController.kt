@@ -2,6 +2,8 @@ package com.example.kotlinspring.controllers
 
 import com.example.kotlinspring.models.TesterDetails
 import com.example.kotlinspring.services.TesterService
+import com.thedeanda.lorem.Lorem
+import com.thedeanda.lorem.LoremIpsum
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,11 +20,17 @@ class TestController(private var testerService: TesterService) {
     }
     
     @GetMapping(value = ["/get-all-items"], produces = [MediaType.TEXT_HTML_VALUE])
-    fun getRouteTester(): ResponseEntity<String> {
-        testerService
-            .getTableRecords()
-            .stream()
-            .forEach { testerDetails: TesterDetails -> println(testerDetails) }
-        return ResponseEntity.ok("CHECK LOGS FOR DETAILS")
+    fun getRouteTester(): List<TesterDetails> {
+        addTestRecordsToTable(30L)
+        return testerService.getTableRecords()
+    }
+
+    private final fun addTestRecordsToTable(nRecords: Long) {
+        var x = 0L
+        val ipsum: Lorem = LoremIpsum.getInstance()
+        while (x < nRecords) {
+            testerService.insertIntoTable(TesterDetails(ipsum.getWords(5), ipsum.getWords(5)))
+            x++
+        }
     }
 }
