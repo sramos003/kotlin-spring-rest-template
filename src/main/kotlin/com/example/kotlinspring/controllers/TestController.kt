@@ -18,7 +18,7 @@ import kotlin.collections.ArrayList
 @RequestMapping(value = ["/test-controller"])
 class TestController(private var usersRepository: IUsersRepository) {
 
-    @GetMapping(value = ["/health-check"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(value = ["/health-check"], produces = [MediaType.TEXT_HTML_VALUE])
     fun healthCheckRoute(): ResponseEntity<String> {
         return ResponseEntity.ok("My first kotlin API")
     }
