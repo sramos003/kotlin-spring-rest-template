@@ -1,6 +1,6 @@
-package com.example.kotlinspring.models
+package com.example.kotlinspring.dao_models
 
-class TesterDetails {
+class Users {
     var userId: Long = 0L
     var userText: String
     var userDescription: String

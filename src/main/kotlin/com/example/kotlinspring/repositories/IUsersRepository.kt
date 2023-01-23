@@ -1,6 +1,6 @@
 package com.example.kotlinspring.repositories
 
-import com.example.kotlinspring.models.TesterDetails
+import com.example.kotlinspring.dao_models.Users
 
 interface IUsersRepository {
     /**
@@ -9,11 +9,11 @@ interface IUsersRepository {
      */
     
     // Create
-    fun insertIntoUsers(details: TesterDetails)
+    fun insertIntoUsers(details: Users)
     // Read - Get all records
-    fun getAllUserRecords(): List<TesterDetails>
+    fun getAllUserRecords(): List<Users>
     // Read - Get one record 
-    fun getUserRecord(userId: Long): TesterDetails?
+    fun getUserRecord(userId: Long): Users?
     // Update
     fun updateUserRecord(userId: Long, userDescription: String)
     // Delete

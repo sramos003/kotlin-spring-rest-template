@@ -1,6 +1,6 @@
 package com.example.kotlinspring.controllers
 
-import com.example.kotlinspring.models.TesterDetails
+import com.example.kotlinspring.dao_models.Users
 import com.example.kotlinspring.repositories.IUsersRepository
 import com.thedeanda.lorem.Lorem
 import com.thedeanda.lorem.LoremIpsum
@@ -32,19 +32,19 @@ class TestController(private var usersRepository: IUsersRepository) {
     @PostMapping(value = ["/save-new-user/{userName}"], produces = [MediaType.TEXT_HTML_VALUE])
     fun saveNewUser(@PathVariable userName: String): ResponseEntity<String> {
         val ipsum: Lorem = LoremIpsum.getInstance()
-        usersRepository.insertIntoUsers(TesterDetails(userName.uppercase(), ipsum.getWords(5)))
+        usersRepository.insertIntoUsers(Users(userName.uppercase(), ipsum.getWords(5)))
         return ResponseEntity.ok(String.format("SAVED NEW USER {%s} TO DB", userName.uppercase()))
     }
 
     // Read - All
     @GetMapping(value = ["/get-all-users"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getAllUsers(): List<TesterDetails> {
+    fun getAllUsers(): List<Users> {
         return ArrayList(usersRepository.getAllUserRecords())
     }
 
     // Read - One
     @GetMapping(value = ["/get-user/{userId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getUser(@PathVariable userId: Long): TesterDetails? {
+    fun getUser(@PathVariable userId: Long): Users? {
         return usersRepository.getUserRecord(userId)
     }
 

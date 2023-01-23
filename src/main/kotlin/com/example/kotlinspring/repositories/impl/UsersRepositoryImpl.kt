@@ -1,6 +1,6 @@
 package com.example.kotlinspring.repositories.impl
 
-import com.example.kotlinspring.models.TesterDetails
+import com.example.kotlinspring.dao_models.Users
 import com.example.kotlinspring.repositories.IUsersRepository
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.PreparedStatementSetter
@@ -12,10 +12,10 @@ import java.sql.ResultSet
 @Component
 
 class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate): IUsersRepository {
-    val usersRowMapper: RowMapper<TesterDetails> =
+    val usersRowMapper: RowMapper<Users> =
         RowMapper { rs: ResultSet, rowNum: Int ->
             run {
-                TesterDetails(
+                Users(
                     rs.getLong("USER_ID"),
                     rs.getString("USER_TEXT"),
                     rs.getString("USER_DESCRIPTION")
@@ -24,7 +24,7 @@ class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate): IUsersReposit
         }
     
     // Create
-    final override fun insertIntoUsers(details: TesterDetails) {
+    final override fun insertIntoUsers(details: Users) {
         val sql = "INSERT INTO USERS (USER_TEXT, USER_DESCRIPTION) VALUES (?, ?)"
         val statementSetter = PreparedStatementSetter { ps: PreparedStatement ->
             run {
@@ -36,13 +36,13 @@ class UsersRepositoryImpl(private var jdbcTemplate: JdbcTemplate): IUsersReposit
     }
 
     // Read - Get all records
-    final override fun getAllUserRecords(): List<TesterDetails> {
+    final override fun getAllUserRecords(): List<Users> {
         var sql = "SELECT USER_ID, USER_TEXT, USER_DESCRIPTION FROM USERS"
         return jdbcTemplate.query(sql, usersRowMapper)
     }
 
     // Read - Get one record 
-    final override fun getUserRecord(userId: Long): TesterDetails? {
+    final override fun getUserRecord(userId: Long): Users? {
         val sql = "SELECT USER_ID, USER_TEXT, USER_DESCRIPTION FROM USERS WHERE USER_ID =?"
         return jdbcTemplate.queryForObject(sql, usersRowMapper, userId)
     }
