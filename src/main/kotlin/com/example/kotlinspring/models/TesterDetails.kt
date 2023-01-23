@@ -1,6 +1,5 @@
 package com.example.kotlinspring.models
 
-
 class TesterDetails {
     var userId: Long = 0L
     var userText: String
@@ -16,8 +15,10 @@ class TesterDetails {
         this.userText = userText
         this.userDescription = userDescription
     }
+    // End of getters.
     
+    // Overriding toString default.
     override fun toString(): String {
-        return String.format("USER_ID: %s, USER_TEXT: %s, USER_DESCRIPTION: %s", userId, userText, userDescription)
+        return String.format("TESTER_DETAILS(USER_ID: %s, USER_TEXT: %s, USER_DESCRIPTION: %s)", userId, userText, userDescription)
     }
 }

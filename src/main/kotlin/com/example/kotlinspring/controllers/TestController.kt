@@ -19,10 +19,10 @@ class TestController(private var testerService: TesterService) {
         return ResponseEntity.ok("My first kotlin API")
     }
     
-    @GetMapping(value = ["/get-all-items"], produces = [MediaType.TEXT_HTML_VALUE])
-    fun getRouteTester(): List<TesterDetails> {
+    @GetMapping(value = ["/get-all-items"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getRouteTester(): ArrayList<TesterDetails> {
         addTestRecordsToTable(30L)
-        return testerService.getTableRecords()
+        return ArrayList(testerService.getTableRecords())
     }
 
     private final fun addTestRecordsToTable(nRecords: Long) {
