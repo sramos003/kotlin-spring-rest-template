@@ -9,7 +9,7 @@ import java.sql.ResultSet
 
 @Component
 class TesterService(private var jdbcTemplate: JdbcTemplate) {
-    
+
     init {
         resetTable()
         createTable()
@@ -42,7 +42,7 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
 
     @Throws(DataAccessException::class)
     fun getTableRecords(): List<TesterDetails> {
-        val details =  jdbcTemplate.query(
+        return jdbcTemplate.query(
             "SELECT * FROM TESTER"
         ) { rs: ResultSet, rowNum: Int ->
             TesterDetails(
@@ -51,8 +51,6 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
                 rs.getString("USER_DESCRIPTION")
             )
         }
-        println(details)
-        return details
     }
 
     @Throws(DataAccessException::class)
@@ -62,7 +60,8 @@ class TesterService(private var jdbcTemplate: JdbcTemplate) {
                     "USER_ID BIGINT NOT NULL PRIMARY KEY," +
                     " USER_TEXT VARCHAR(50) NOT NULL," +
                     " USER_DESCRIPTION VARCHAR(100) NOT NULL DEFAULT 'GENERIC DESCRIPTION'" +
-                    " )")
+                    " )"
+        )
     }
 
     @Throws(DataAccessException::class)

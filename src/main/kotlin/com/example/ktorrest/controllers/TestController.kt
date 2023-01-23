@@ -1,5 +1,6 @@
 package com.example.ktorrest.controllers
 
+import com.example.ktorrest.models.TesterDetails
 import com.example.ktorrest.services.TesterService
 import lombok.AllArgsConstructor
 import org.springframework.http.MediaType
@@ -20,7 +21,10 @@ class TestController(private var testerService: TesterService) {
     
     @GetMapping(value = ["/get-all-items"], produces = [MediaType.TEXT_HTML_VALUE])
     fun getRouteTester(): ResponseEntity<String> {
-        val details = testerService.getTableRecords()
+        testerService
+            .getTableRecords()
+            .stream()
+            .forEach { testerDetails: TesterDetails -> println(testerDetails) }
         return ResponseEntity.ok("CHECK LOGS FOR DETAILS")
     }
 }
