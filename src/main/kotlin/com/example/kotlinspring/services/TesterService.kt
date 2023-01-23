@@ -1,6 +1,6 @@
-package com.example.ktorrest.services
+package com.example.kotlinspring.services
 
-import com.example.ktorrest.models.TesterDetails
+import com.example.kotlinspring.models.TesterDetails
 import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Component

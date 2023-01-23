@@ -1,7 +1,7 @@
-package com.example.ktorrest.controllers
+package com.example.kotlinspring.controllers
 
-import com.example.ktorrest.models.TesterDetails
-import com.example.ktorrest.services.TesterService
+import com.example.kotlinspring.models.TesterDetails
+import com.example.kotlinspring.services.TesterService
 import lombok.AllArgsConstructor
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity

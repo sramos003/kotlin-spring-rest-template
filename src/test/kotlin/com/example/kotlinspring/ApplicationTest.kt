@@ -1,10 +1,10 @@
-package com.example.ktorrest
+package com.example.kotlinspring
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class KtorRestTemplateApplicationTests {
+class ApplicationTest {
 
     @Test
     fun contextLoads() {

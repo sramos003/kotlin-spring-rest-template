@@ -1,4 +1,4 @@
-package com.example.ktorrest.models
+package com.example.kotlinspring.models
 
 
 class TesterDetails(
