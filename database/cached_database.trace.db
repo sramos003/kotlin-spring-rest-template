@@ -1,0 +1,12 @@
+2023-01-22 23:06:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "updated user description"; SQL statement:
+UPDATE USERS SET USER_DESCRIPTION =? WHERE USER_ID =? [22018-214]
+2023-01-22 23:07:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting """updated user description"""; SQL statement:
+UPDATE USERS SET USER_DESCRIPTION =? WHERE USER_ID =? [22018-214]
+2023-01-22 23:11:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "test string"; SQL statement:
+UPDATE USERS SET USER_DESCRIPTION =? WHERE USER_ID =? [22018-214]
+2023-01-22 23:16:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting """string"""; SQL statement:
+UPDATE USERS SET USER_DESCRIPTION =? WHERE USER_ID =? [22018-214]

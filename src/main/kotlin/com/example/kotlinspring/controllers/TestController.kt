@@ -1,38 +1,65 @@
 package com.example.kotlinspring.controllers
 
 import com.example.kotlinspring.models.TesterDetails
-import com.example.kotlinspring.services.TesterService
+import com.example.kotlinspring.repositories.IUsersRepository
 import com.thedeanda.lorem.Lorem
 import com.thedeanda.lorem.LoremIpsum
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.util.concurrent.ThreadLocalRandom
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import kotlin.collections.ArrayList
 
 @RestController
 @RequestMapping(value = ["/test-controller"])
-class TestController(private var testerService: TesterService) {
+class TestController(private var usersRepository: IUsersRepository) {
 
     @GetMapping(value = ["/health-check"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun healthCheckRoute(): ResponseEntity<String> {
         return ResponseEntity.ok("My first kotlin API")
     }
-    
-    @GetMapping(value = ["/get-all-items"], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getRouteTester(): List<TesterDetails> {
-        initializeTableData()
-        return ArrayList(testerService.getTableRecords())
+
+    /**
+     * Below are included methods to perform the basic CRUD operations on an internal H2 database having its state
+     * saved on application exit to ./database/cached_database.mv.db
+     */
+
+    // Create
+    @PostMapping(value = ["/save-new-user/{userName}"], produces = [MediaType.TEXT_HTML_VALUE])
+    fun saveNewUser(@PathVariable userName: String): ResponseEntity<String> {
+        val ipsum: Lorem = LoremIpsum.getInstance()
+        usersRepository.insertIntoUsers(TesterDetails(userName.uppercase(), ipsum.getWords(5)))
+        return ResponseEntity.ok(String.format("SAVED NEW USER {%s} TO DB", userName.uppercase()))
     }
 
-    private final fun initializeTableData() {
-        val ipsum: Lorem = LoremIpsum.getInstance()
-        val recordsToGenerate: Long = ThreadLocalRandom.current().nextLong(5, 50)
-        var x = 0L
-        while (x < recordsToGenerate) {
-            testerService.insertIntoTable(TesterDetails(ipsum.getWords(5), ipsum.getWords(5)))
-            x++
-        }
+    // Read - All
+    @GetMapping(value = ["/get-all-users"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getAllUsers(): List<TesterDetails> {
+        return ArrayList(usersRepository.getAllUserRecords())
+    }
+
+    // Read - One
+    @GetMapping(value = ["/get-user/{userId}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getUser(@PathVariable userId: Long): TesterDetails? {
+        return usersRepository.getUserRecord(userId)
+    }
+
+    // Update
+    @PostMapping(value = ["/update-user-description/{userId}"], produces = [MediaType.TEXT_HTML_VALUE])
+    fun updateUser(@PathVariable userId: Long, @RequestBody userDescription: String): ResponseEntity<String> {
+        usersRepository.updateUserRecord(userId, userDescription)
+        return ResponseEntity.ok(String.format("UPDATED USER_ID %s", userId))
+    }
+
+    // Delete
+    @GetMapping(value = ["/delete-all-users"], produces = [MediaType.TEXT_HTML_VALUE])
+    fun deleteAllUsers(): ResponseEntity<String> {
+        usersRepository.deleteUserRecords()
+        return ResponseEntity.ok("TABLE CLEARED SUCCESSFULLY")
+
     }
 }
