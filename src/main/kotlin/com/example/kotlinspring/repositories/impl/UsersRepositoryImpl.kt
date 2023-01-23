@@ -1,6 +1,7 @@
-package com.example.kotlinspring.repositories
+package com.example.kotlinspring.repositories.impl
 
 import com.example.kotlinspring.models.TesterDetails
+import com.example.kotlinspring.repositories.IUsersRepository
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.PreparedStatementSetter
 import org.springframework.jdbc.core.RowMapper
