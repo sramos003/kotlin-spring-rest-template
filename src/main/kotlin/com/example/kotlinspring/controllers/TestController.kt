@@ -2,7 +2,6 @@ package com.example.kotlinspring.controllers
 
 import com.example.kotlinspring.models.TesterDetails
 import com.example.kotlinspring.services.TesterService
-import lombok.AllArgsConstructor
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping(value = ["/test-controller"])
-@AllArgsConstructor
 class TestController(private var testerService: TesterService) {
 
     @GetMapping(value = ["/one"], produces = [MediaType.APPLICATION_JSON_VALUE])
