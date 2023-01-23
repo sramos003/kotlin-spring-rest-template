@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping(value = ["/test-controller"])
 class TestController(private var testerService: TesterService) {
 
-    @GetMapping(value = ["/one"], produces = [MediaType.APPLICATION_JSON_VALUE])
+    @GetMapping(value = ["/health-check"], produces = [MediaType.APPLICATION_JSON_VALUE])
     fun healthCheckRoute(): ResponseEntity<String> {
         return ResponseEntity.ok("My first kotlin API")
     }
